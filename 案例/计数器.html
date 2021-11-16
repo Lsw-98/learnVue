@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计数器</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{number}}</h2>
+    <!-- v-on绑定事件 -->
+    <button @click="add">+</button>
+    <button @click="jian">-</button>
+  </div>
+
+  <script>
+    const v = new Vue({
+      el: '#app',
+      data() {
+        return {
+          number: 0
+        };
+      },
+      methods: {
+        add() {
+          this.number++
+        },
+        jian() {
+          this.number--
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>

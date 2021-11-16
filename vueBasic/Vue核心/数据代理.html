@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="../../js/vue.js"></script>
+  <title>数据代理</title>
+</head>
+
+<body>
+  <!-- 通过一个对象代理对另一个对象中属性的操作(读/写) -->
+  <div id="app">
+    <h2>学校名：{{name}}</h2>
+    <h2>学校地址：{{address}}</h2>
+  </div>
+
+  <script type="text/javascript">
+    // 定义一个对象
+    let num = 18
+    let Person = {
+      name: "张三",
+      age: 22,
+    }
+
+    // 使用Object.defineProperty()给Person对象添加属性
+    Object.defineProperty(Person, 'age', {
+      // value: "123456789@xx.com",
+      // enumerable: true,   // 控制属性是否可以遍历，默认值为false
+      // writable: true,    // 控制属性是否可修改，默认值为false
+      // configurable: true,   // 控制属性是否被删除，默认值为false
+
+      // 当有人读取person属性时，get函数(getter)会被调用
+      get() {
+        return num
+      },
+
+      // 当有人修改person属性时，set函数(setter)会被调用
+      set(value) {
+        num = value
+        return num
+      }
+    })
+
+    console.log(Person)
+    console.log(Object.keys(Person))
+
+    // 数据代理：通过一个对象代理对另一个对象中属性进行操作
+    let obj1 = {
+      x: 100
+    }
+
+    let obj2 = {
+      y: 200
+    }
+
+    // 给obj2添加x属性，更改obj2中的x属性
+    Object.defineProperty(obj2, 'x', {
+      get() {
+        return obj1.x
+      },
+      set(value) {
+        obj1.x = value   // 通过obj2操作obj1的x
+      }
+    })
+
+    // 使用Vue实例操作数据代理
+
+    // 1. Vue中的数据代理
+    //    通过vm对象来代理data对象中属性的操作
+    // 2. Vue中使用数据代理的好处
+    //    更加方便地对data中的数据进行操作
+    // 3. 基本原理：
+    //    通过Object.defineProperty()方法把data对象中所有属性添加到vm上，
+    //    为每一个添加到vm上的属性，都指定一个getter/setter
+    //    在getter/setter内部去操作data中的属性
+
+    const vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+          name: "重邮",
+          address: "南山",
+        };
+      },
+      methods: {
+
+      },
+    });
+  </script>
+</body>
+
+</html>
