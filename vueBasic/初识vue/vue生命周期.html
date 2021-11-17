@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue生命周期</title>
+  <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="button" value="A组件" @click="currentTabComponent='a_component'" />
+    <input type="button" value="B组件" @click="currentTabComponent='b_component'" />
+
+    <component :is="currentTabComponent"></component>
+  </div>
+
+  <script>
+    const v = new Vue({
+      el: '#app',
+      data() {
+        return {
+          number: 10,
+          currentTabComponent: 'a_component',
+        };
+      },
+      methods: {
+      },
+      components: {
+        a_component: {
+          template: '<h1>我是A组件</h1>',
+          beforeCreate() {
+            console.log('a_component beforeCreate')
+          },
+          created() {
+            console.log('a_component created')
+          },
+          beforeMount() {
+            console.log('a_component beforeMount')
+          },
+          mounted() {
+            console.log('a_component mounted')
+          },
+          beforeUpdate() {
+            console.log('a_component beforeUpdate')
+          },
+          updated() {
+            console.log('a_component updated')
+          },
+          beforeDestroy() {
+            console.log('a_component beforeDestroy')
+          },
+          destroyed() {
+            console.log('a_component destroyed')
+          }
+        },
+        b_component: {
+          beforeCreate() {
+            console.log('b_component beforeCreate')
+          },
+          created() {
+            console.log('b_component created')
+          },
+          beforeMount() {
+            console.log('b_component beforeMount')
+          },
+          mounted() {
+            console.log('b_component mounted')
+          },
+          beforeUpdate() {
+            console.log('b_component beforeUpdate')
+          },
+          updated() {
+            console.log('b_component updated')
+          },
+          template: '<h1>我是B组件</h1>',
+          beforeDestroy() {
+            console.log('b_component beforeDestroy')
+          },
+          destroyed() {
+            console.log('b_component destroyed')
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

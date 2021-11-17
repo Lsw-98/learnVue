@@ -17,17 +17,58 @@
     <h1>指令语法, 用于解析标签（包括：标签属性、标签体内容、绑定事件）</h1>
     <a :href="url1">百度</a> <!-- v-bind, 绑定属性后""中的内容会被当成表达式执行 -->
     <a :href="url2">豆瓣</a>
+
+    <!-- v-bind绑定class -->
+    <h2 :class="redColor">{{message}}</h2>
+
+    <h1>v-bind绑定对象语法</h1>
+    <!-- 
+      <h1 :class="{类名1：boolean, 类名2：boolean,...}">点击按钮变换颜色</h1> 
+      当boolean为true时，对应的类会被添加到h1标签中
+    -->
+    <button :class="{active: isActive}" @click="btnClick">百度</button>
+    <button :class="getClasses()" @click="btnClick">字节</button>
+
+    <h1>v-bind绑定数组语法</h1>
+    <!-- 
+      <h2 :class="[arr1, arr2]">{{message}}</h2>
+      数组中的参数可以是变量，也可以是字符串
+    -->
+    <h2 :class="[first, second]">{{message}}</h2>
+
   </div>
-  <script src="../../js/vue.js">
+  <script type="text/javascript">
     let demo = new Vue({
       el: "#app",
       data: {
         name: "刘帅武",
         url1: "http://www.baidu.com",
         url2: "http://www.douban.com",
+
+        message: "我要年薪50W",
+        redColor: "active",  // active为样式名
+
+        isActive: false,
+        isLine: true,
+
+        first: 'aaaa',
+        second: 'bbbb',
+      },
+      methods: {
+        btnClick() {
+          this.isActive = !this.isActive
+        },
+        getClasses() {
+          return { active: this.isActive, line: this.isLine }   // 在methods中调用data需要加this
+        },
       }
     })
   </script>
+  <style scoped>
+    .active {
+      color: red;
+    }
+  </style>
 
 </body>
 

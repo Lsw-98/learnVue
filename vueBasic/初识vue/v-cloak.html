@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-pre指令</title>
+  <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <!-- 使用v-cloak隐藏未解析的代码 -->
+    <h2>{{message}}</h2>
+  </div>
+  <script>
+    // 在Vue解析之前，div中有v-cloak属性
+    // 在Vue解析完成后，div中的v-cloak属性就被删除了
+    setTimeout(function () {
+      const v = new Vue({
+        el: '#app',
+        data() {
+          return {
+            message: "你好"
+          };
+        },
+        methods: {
+
+        },
+      });
+    }, 1000)
+  </script>
+  <style scoped>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</body>
+
+</html>
