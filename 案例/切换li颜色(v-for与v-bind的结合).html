@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(item, index) in movies" :class="{active: isColor == index}" :key="index" @click="btnClick(index)">
+        {{item}}</li>
+    </ul>
+  </div>
+
+  <script>
+    const v = new Vue({
+      el: '#app',
+      data() {
+        return {
+          movies: ['艾欧尼亚', '德玛西亚', '诺克萨斯', '皮尔特沃夫'],
+          isColor: -1,
+        };
+      },
+      methods: {
+        getclasses() {
+
+        },
+        btnClick(index) {
+          this.isColor = index
+        }
+      },
+    });
+  </script>
+
+  <style scoped>
+    .active {
+      color: red;
+    }
+  </style>
+</body>
+
+</html>

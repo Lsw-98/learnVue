@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../js/vue.js"></script>
+  <title>计算属性的基本使用</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{fullName}}</h2>
+    <h2>{{sum}}</h2>
+  </div>
+
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          firstName: "刘",
+          lastName: "帅武",
+          students: [
+            { Object: "数学", name: "张三", grade: 89 },
+            { Object: "语文", name: "张三", grade: 49 },
+            { Object: "Vue", name: "张三", grade: 100 },
+            { Object: "Python", name: "张三", grade: 99 },
+          ],
+          res: 0,
+        };
+      },
+      computed: {
+        fullName() {
+          return this.firstName + this.lastName
+        },
+        sum() {
+          for (let grade of this.students) {
+            this.res += grade.grade
+          }
+          return this.res
+        }
+      },
+      methods: {
+
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>
