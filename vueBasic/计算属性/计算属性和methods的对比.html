@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../js/vue.js"></script>
+  <title>计算属性和methods的对比</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 调用计算属性 -->
+    <h2>{{getFullName}}</h2>
+    <h2>{{getFullName}}</h2>
+    <h2>{{getFullName}}</h2>
+    <h2>{{getFullName}}</h2>
+
+    <!-- 调用methods -->
+    <h2>{{FullName()}}</h2>
+    <h2>{{FullName()}}</h2>
+    <h2>{{FullName()}}</h2>
+    <h2>{{FullName()}}</h2>
+
+    <!-- 
+      最终methods被调用了4次，计算属性只被调用1次，因此计算属性的效率比methods高
+      计算属性在调用的变量没有发生变化时会被Vue缓存起来，下次调用时会直接在缓存中调用，
+      只有在计算属性调用的变量发生变化时才会重新执行
+     -->
+  </div>
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          firstName: "刘",
+          lastName: "帅武",
+        };
+      },
+      computed: {
+        getFullName() {
+          console.log("getFullName");
+          return this.firstName + this.lastName
+        },
+      },
+      methods: {
+        FullName() {
+          console.log("FullName");
+          return this.firstName + this.lastName
+        },
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

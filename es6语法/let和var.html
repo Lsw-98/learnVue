@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>let和var</title>
+</head>
+
+<body>
+  <div id="app">
+    <button>第一个按钮</button>
+    <button>第二个按钮</button>
+    <button>第三个按钮</button>
+    <button>第四个按钮</button>
+    <button>第五个按钮</button>
+  </div>
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+    });
+
+    // 1.变量作用域：变量在什么范围内可用
+    // 没有块级作用域引起的问题: 块外也可以调用message
+    // {
+    //   var messgae = "你好啊"
+    //   console.log(messgae);
+    // }
+
+    // console.log(messgae);
+
+    {
+      let messgae = "你好啊"
+      console.log(messgae);
+    }
+
+    // console.log(messgae);   // 会报错：messgae is not defined
+
+    // 若使用var定义i，则for没有自己的作用域，不论点击哪个按钮都只会显示i=5的情况
+    // const btns = document.getElementsByTagName('button')
+    // for (var i = 0; i < btns.length; i++) {
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + (i + 1) + "个按钮");
+    //   })
+    // }
+
+    // 使用let则有块级作用域
+    const btns = document.getElementsByTagName('button')
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        console.log('第' + (i + 1) + "个按钮");
+      })
+    }
+
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>
