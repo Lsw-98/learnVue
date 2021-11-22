@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../js/vue.js"></script>
+  <title>v-on修饰符</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 
+      由于事件冒泡，divClick也会触发
+      若想在某一层停止冒泡，可以加 .stop 修饰符
+     -->
+    <div @click="divClick">
+      我是div
+      <button @click.stop="btnClick">我是btn</button>
+    </div>
+
+    <br>
+
+    <!-- 
+      .prevent修饰符用来阻止默认事件的发生
+     -->
+    <form action="www.baidu.com">
+      <input type="submit" value="提交" @click.prevent="subClick">
+    </form>
+
+    <br>
+
+    <!-- 
+      .once修饰符用来使绑定事件只触发一次
+     -->
+    <button @click.once="btnClick">点我</button>
+
+    <br>
+
+    <!-- 
+      keyup：监听键盘事件
+     -->
+    <input type="text" @keyup="KeyUp">
+    <!-- 只监听回车键 -->
+    <input type="text" @keyup.enter="KeyUpEnter">
+  </div>
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+        divClick() {
+          console.log("divClick");
+        },
+        btnClick() {
+          console.log("btnClick");
+        },
+        subClick() {
+          console.log("subClick");
+        },
+        KeyUp() {
+          console.log("KeyUp");
+        },
+        KeyUpEnter() {
+          console.log("KeyUp-enter");
+        },
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../js/vue.js"></script>
+  <title>v-show</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2 v-if="flag">{{message}}</h2>
+    <h2 v-show="flag">{{message}}</h2>
+  </div>
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          message: "你好",
+          flag: false,
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

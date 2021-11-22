@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>const</title>
+</head>
+
+<body>
+  <!-- 
+    在ES6开发中，优先使用const，
+    只有需要改变某一标识符的时候才使用let
+   -->
+
+  <script>
+    // 使用const必须在定义 标识符时进行赋值
+    const number = 10;
+
+    // 使用const定义对象时，可以更改对象中的值
+    const students = {
+      name: "刘帅武",
+      age: 23,
+      height: 1.83
+    }
+
+    students.name = "我嫩爹"
+    console.log(students);
+  </script>
+
+
+  <script>
+
+  </script>
+</body>
+
+</html>

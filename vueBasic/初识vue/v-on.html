@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../js/vue.js"></script>
+  <title>v-on</title>
+</head>
+
+<body>
+  <!-- 
+    前端经常需要和用户进行交互，这个时候我们就要监听用户的行为，如点击、拖拽、键盘事件等
+    在Vue中使用v-on进行监听
+   -->
+  <div id="app">
+    <h2>{{count}}</h2>
+    <button @click="jia">+</button>
+    <button @click="jian">-</button>
+
+    <!-- 
+      在调用方法时，如何手动的获取到浏览器参数的event对象: 使用$event对象
+     -->
+    <button @click="getEvent($event)">得到浏览器event参数</button>
+    <button @click="test(123, event)">普通的event变量</button>
+  </div>
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          count: 0,
+          event: "event",
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+        jia() {
+          this.count += 1
+        },
+        jian() {
+          this.count -= 1
+        },
+        getEvent(event) {
+          console.log(event);
+        },
+        test(a, b) {
+          console.log(a, b);
+        },
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

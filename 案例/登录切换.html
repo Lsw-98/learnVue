@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>登录切换</title>
+</head>
+
+<body>
+  <div id="app">
+    <span v-if="flag">
+      <!-- label中的for属性可以在鼠标点击label的文字时使input聚焦 -->
+      <!-- placeholder属性显示文本框默认输入的文字 -->
+      <!-- key属性可以表示input，在切换登录后input中的内容不会被复用 -->
+      <label for="username">用户账号:</label>
+      <input type="text" id="username" placeholder="用户账号" key="username">
+    </span>
+    <span v-else>
+      <label for="email">用户邮箱:</label>
+      <input type="text" id="email" placeholder="用户邮箱" key="email">
+    </span>
+    <button @click="btnClick">切换类型</button>
+  </div>
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          flag: true,
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+        btnClick() {
+          this.flag = !this.flag
+        },
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>
