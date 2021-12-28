@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../js/vue.js"></script>
+  <title>关于v-for的key</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <input type="text" v-model="name">
+      <input type="text" v-model="importIndex">
+      <button @click="add1">在头部添加</button>
+      <button @click="add2">指定位置添加</button>
+      <button @click="add3">在尾部添加</button>
+      <button @click="del1">删除尾部元素</button>
+      <button @click="del2">删除头部元素</button>
+      <button @click="del3">删除指定元素</button>
+      <button @click="replace1">替换指定元素</button>
+      <button @click="replace2">替换指定元素-Vue方法</button>
+      <button @click="reverse">反转数组元素</button>
+    </div>
+    <ul>
+      <!-- key要与item一一对应，不一定绑定index -->
+      <li v-for="(item, index) in list" :key="item.id">
+        <input type="checkbox"> {{item.name}}
+      </li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          name: '',
+          newId: 3,
+          list: [
+            { id: 1, name: '张三' },
+            { id: 2, name: '李四' },
+            { id: 3, name: '王五' }
+          ],
+          importIndex: 0,
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+        // 数组响应式方法
+        add1() {
+          // unshift() 方法可向数组的开头添加一个或更多元素,并返回新的长度
+          this.list.unshift({ id: ++this.newId, name: this.name })
+          this.name = ''
+        },
+        add2() {
+          // splice(importIndex, 0, '元素')方法可向数组任意位置插入元素
+          // 在importIndex的位置插入'元素'
+          this.list.splice(this.importIndex, 0, { id: ++this.newId, name: this.name })
+          this.name = ''
+        },
+        add3() {
+          // push()方法向数组任意位置插入元素，可添加多个元素
+          this.list.push({ id: ++this.newId, name: this.name })
+          this.name = ''
+        },
+        del1() {
+          this.list.pop()
+        },
+        del2() {
+          // 删除数组第一个元素，可删除多个元素
+          this.list.shift()
+        },
+        del3() {
+          // splice(startIndex, 2)
+          // 在startIndex位置删除两个元素
+          this.list.splice(1, 2)
+        },
+        replace1() {
+          // splice(startIndex, length, 'var1', 'var2', ...)
+          this.list.splice(1, 1, { id: 1, name: this.name })
+        },
+        replace2() {
+          // Vue.set(array, Index, var)
+          // 将array的Index位置的元素替换为var
+          Vue.set(this.list, 0, { id: ++this.newId, name: this.name })
+          this.name = ''
+        },
+        sort() {
+          this.list.sort()
+        },
+        reverse() {
+          this.list.reverse()
+        },
+
+        // !!!通过索引修改数组不是响应式的
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

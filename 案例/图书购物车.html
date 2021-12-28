@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>图书购物车</title>
+</head>
+
+<body>
+  <div id="app">
+    <div v-if="books.length">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>书籍名称</th>
+            <th>出版日期</th>
+            <th>价格</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 
+            <th>在单元格中居中加粗显示
+            <td>在单元格中左对齐
+            -->
+          <tr v-for="(item, index) in books" :key="index">
+            <td>{{item.id}}</td>
+            <td>{{item.book}}</td>
+            <td>{{item.date}}</td>
+            <!-- 
+              num.toFixed(2)
+              保留两位小数
+             -->
+            <td>{{item.price | getPrice}}</td>
+            <!-- 传index改变num -->
+            <td><button @click="sub(index)" :disabled="item.num <= 1">-</button>{{item.num}}
+              <button @click="add(index)">+</button>
+            </td>
+            <td><button @click="remove(index)">移除</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>总价：{{getTotalPrice | getPrice}}</h2>
+    </div>
+    <div v-else>购物车为空</div>
+
+  </div>
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          books: [
+            {
+              id: 1,
+              book: '《算法导论》',
+              date: '2006-9',
+              price: 85,
+              num: 1,
+            },
+            {
+              id: 2,
+              book: '《Unix编程艺术》',
+              date: '2006-2',
+              price: 59,
+              num: 1,
+            },
+            {
+              id: 3,
+              book: '《算法与数据结构》',
+              date: '2006-10',
+              price: 39,
+              num: 1,
+            },
+            {
+              id: 4,
+              book: '《代码大全》',
+              date: '2006-3',
+              price: 128,
+              num: 1,
+            },
+          ],
+
+        };
+      },
+      computed: {
+        getTotalPrice() {
+          let totalPrice = 0;
+          for (let i in this.books) {
+            totalPrice += this.books[i].num * this.books[i].price
+          }
+          return totalPrice
+        },
+      },
+      methods: {
+        add(index) {
+          this.books[index].num += 1
+        },
+        sub(index) {
+          this.books[index].num -= 1
+        },
+        remove(index) {
+          this.books.splice(index, 1)
+        },
+      },
+      filters: {
+        getPrice(price) {
+          return '￥' + price.toFixed(2)
+        },
+      },
+    });
+  </script>
+
+  <style scoped>
+    table {
+      border: 1px solid #e9e9e9;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    th,
+    td {
+      padding: 8px 16px;
+      border: 1px solid #e9e9e9;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f7f7f7;
+      color: #5c6b77;
+      font-weight: 600;
+    }
+  </style>
+
+</body>
+
+</html>

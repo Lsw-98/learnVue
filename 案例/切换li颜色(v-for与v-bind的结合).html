@@ -12,7 +12,8 @@
 <body>
   <div id="app">
     <ul>
-      <li v-for="(item, index) in movies" :class="{active: isColor == index}" :key="index" @click="btnClick(index)">
+      <!-- :class: 绑定类样式，通过对象的方式可以加布尔表达式 -->
+      <li v-for="(item, index) in movies" :class="{active: isColor == index}" :key="item" @click="btnClick(index)">
         {{item}}</li>
     </ul>
   </div>
@@ -23,7 +24,7 @@
       data() {
         return {
           movies: ['艾欧尼亚', '德玛西亚', '诺克萨斯', '皮尔特沃夫'],
-          isColor: -1,
+          isColor: 0,
         };
       },
       methods: {
