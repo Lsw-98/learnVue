@@ -91,8 +91,11 @@
       computed: {
         getTotalPrice() {
           let totalPrice = 0;
-          for (let i in this.books) {
-            totalPrice += this.books[i].num * this.books[i].price
+          // for (let i in this.books) {
+          //   totalPrice += this.books[i].num * this.books[i].price
+          // }
+          for (let i of this.books) {
+            totalPrice += i.num * i.price
           }
           return totalPrice
         },

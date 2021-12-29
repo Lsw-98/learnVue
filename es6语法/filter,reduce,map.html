@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>filter、map、reduce</title>
+</head>
+
+<body>
+  <div id="app">
+
+  </div>
+  <script type="text/javascript">
+    // filter(): 创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
+    // filter()不会对空数组进行检测，不会改变原始数组
+
+    // filter()中的回调函数返回一个布尔值
+    // 过滤掉arr1中小于100的数
+    let arr1 = [10, 20, 30, 400, 500, 60, 70]
+    let arr1res = arr1.filter(function (n) {
+      return n < 100
+    })
+
+    // map()：返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值
+    // map()不会对空数组进行检测，不会改变原始数组
+
+    // 将arr1res数组中每个元素✖2
+    let arr2 = arr1res.map(function (n) {
+      return n * 2
+    })
+
+    // reduce()：接受一个函数，对数组中元素进行累加，返回一个值
+    // reduce()的回调函数接收两个参数，一个是上一个的值，一个是当前值
+
+    // 对arr2中元素求和
+    // 第一次循环：prevalue初始值为0，n初始值为arr2[0]
+    // 第二次循环：prevalue的值为return的值，n为arr2[1]
+    // ...
+    let total = arr2.reduce(function (prevalue, n) {
+      return prevalue + n
+    }, 0)
+
+    // 将上述三种方法一起使用
+    let res = arr1.filter(function (n) {
+      return n < 100
+    }).map(function (n) {
+      return n * 2
+    }).reduce(function (prevalue, n) {
+      return prevalue + n
+    }, 0)
+    console.log(res);
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

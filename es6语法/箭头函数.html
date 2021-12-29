@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>箭头函数</title>
+</head>
+
+<body>
+  <div id="app">
+
+  </div>
+  <script type="text/javascript">
+    // 使用ES6的箭头函数语法定义函数，将原函数的function关键字和函数名都删掉，使用 => 代替，链接参数列表和函数体
+    let f1 = (a, b) => {
+      return a + b
+    }
+
+    (a, b) => {
+      return a - b
+    }
+
+
+    // 当函数参数只有一个，括号可以省略；但是没有参数时，括号不可以省略。
+    // 无参
+    let f2 = function () { }
+    let f2es6 = () => { }
+
+    // 单个参数
+    let f3 = function (a) { }
+    let f3es6 = a => { }
+
+    // 多个参数
+    let f4 = function (a, b, c) { }
+    let f4es6 = (a, b, c) => { }
+
+    // 可变参数
+    let f5 = function (a, b, ...args) { }
+    let f5es6 = (a, b, ...args) => { }
+
+
+    // 箭头函数有两种格式，一种只包含一个表达式，省略掉了函数体和return
+    // 还有一种可以包含多条语句，这时候就不能省略函数体和return
+    // 只包含一个表达式
+    () => s = '你好';
+    (a, b) => c = a + b
+
+    // 多条语句
+    a => {
+      a += 1
+      return a
+    }
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>
