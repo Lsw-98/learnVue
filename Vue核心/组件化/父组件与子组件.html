@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>父组件与子组件</title>
+  <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <cpn></cpn>
+  </div>
+  <script type="text/javascript">
+    // 1.创建两个组件
+    const cpnChild = Vue.extend({
+      template: `
+      <div>
+        <h2>我是子</h2>
+      </div>
+      `,
+    })
+
+    const cpnFather = Vue.extend({
+      template: `
+      <div>
+        <h2>我是父</h2>
+        <cpn></cpn>
+      </div>
+      `,
+      components: {
+        cpn: cpnChild,
+      }
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+      components: {
+        cpn: cpnFather,
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

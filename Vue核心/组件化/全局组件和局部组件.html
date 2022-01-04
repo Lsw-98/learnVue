@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全局组件和局部组件</title>
+  <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <cpn></cpn>
+  </div>
+  <script type="text/javascript">
+    const cpn = Vue.extend({
+      template: `
+        <div>
+          <h2>我是标题哟~</h2>
+        </div>
+      `,
+    })
+    // 注册全局组件(全局组件意味着可以在多个Vue实例下使用)
+    // Vue.component('my-cpn', cpn)
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+      components: {  // 注册局部组件
+        // cpn：组件标签名
+        cpn: cpn
+      }
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

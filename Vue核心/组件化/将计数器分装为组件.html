@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>将计数器分装为组件</title>
+  <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 这两个实例化的组件用的data数据不是一个东西 -->
+    <cpn></cpn>
+    <cpn></cpn>
+  </div>
+
+  <!-- 
+    封装计数器组件
+   -->
+  <template id="jishuqi">
+    <div>
+      <button @click="sub">-</button>
+      {{count}}
+      <button @click="add">+</button>
+    </div>
+  </template>
+  <script type="text/javascript">
+    Vue.component('cpn', {
+      template: "#jishuqi",
+      data() {
+        return {
+          count: 0,
+        };
+      },
+      methods: {
+        sub() {
+          this.count--
+        },
+        add() {
+          this.count++
+        },
+      },
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+      components: {
+
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

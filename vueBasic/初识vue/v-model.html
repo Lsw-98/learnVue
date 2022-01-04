@@ -14,20 +14,107 @@
     <!-- 
       v-model指令用来实现表单元素和数据的双向绑定
      -->
+    <input type="text" v-model="message">
+    {{message}}
+    <br>
+
+    <!-- v-model的实现原理 -->
+    <!-- 
+      首先使用v-bind绑定messgae值 
+      然后使用v-on获得输入框的值更新message
+    -->
+    <input type="text" :value="message" @input="getInput">
+    <input type="text" :value="message" @input="this.message = $event.target.value">
+    {{message}}
+    <br />
+
+    <!-- v-model结合radio使用 -->
+    <!-- 
+      radio互斥：加相同的name或v-model绑定同一个data
+     -->
+    <label for="male">
+      <input type="radio" id="male" name="sex" value="男" v-model="sex">男
+    </label>
+    <label for="female">
+      <input type="radio" id="female" name="sex" value="女" v-model="sex">女
+    </label>
+    <h2>你选择的性别是：{{sex}}</h2>
+    <br>
+
+    <!-- v-model结合checkbox使用 -->
+    <!-- 
+      单选框
+     -->
+    <label for="agree">
+      <input type="checkbox" id="agree" v-model="isAgree">同意协议
+      <button :disabled="!isAgree">下一步</button>
+    </label>
+    <h2>你选择的是：{{isAgree}}</h2>
+    <br>
+
+    <!-- 
+      多选框
+     -->
+    <input type="checkbox" value="篮球" v-model="hobbies">篮球
+    <input type="checkbox" value="听音乐" v-model="hobbies">听音乐
+    <input type="checkbox" value="写代码" v-model="hobbies">写代码
+    <input type="checkbox" value="足球" v-model="hobbies">足球
+    <h2>你的爱好是{{hobbies}}</h2>
+    <br>
+
+    <!-- v-model结合select使用 -->
+    <!-- 
+      单选框
+    -->
+    <select name="abc" id="" v-model="fruit">
+      <option value="苹果">苹果</option>
+      <option value="香蕉">香蕉</option>
+      <option value="橙子">橙子</option>
+      <option value="猕猴桃">猕猴桃</option>
+    </select>
+    <h2>你选择的水果是：{{fruit}}</h2>
+    <br>
+
+    <!-- 
+      多选框
+    -->
+    <select name="abc" id="" v-model="fruits" multiple>
+      <option value="苹果">苹果</option>
+      <option value="香蕉">香蕉</option>
+      <option value="橙子">橙子</option>
+      <option value="猕猴桃">猕猴桃</option>
+    </select>
+    <h2>你选择的水果是：{{fruits}}</h2>
+    <br>
+
+    <!-- 值绑定 -->
+    <label :for="item" v-for="(item, index) in originHobbies" :key=index>
+      <input type="checkbox" :id="item" :value="item" v-model="Hobby">{{item}}
+    </label>
+    <h2>你的爱好是：{{Hobby}}</h2>
   </div>
   <script type="text/javascript">
     const app = new Vue({
       el: '#app',
       data() {
         return {
-
-        };
+          message: "你好",
+          sex: '男',
+          isAgree: false,
+          hobbies: [],
+          fruit: "橙子",
+          fruits: [],
+          originHobbies: ['篮球', '足球', '乒乓球', '写代码', '游泳'],
+          Hobby: []
+        }
       },
       computed: {
 
       },
       methods: {
-
+        getInput(event) {
+          this.message = event.target.value
+        },
       },
     });
   </script>

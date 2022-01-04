@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model修饰符</title>
+  <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 
+      lazy
+      当输入框失去焦点或回车时才会实现绑定
+    -->
+    <input type="text" v-model.lazy="message">{{message}}
+    <br>
+
+    <!-- 
+      number
+      让输入框输入的内容自动转换为数字类型
+     -->
+    <input type="text" v-model.number="age">{{age}}
+    <h2>{{age}}--{{typeof age}}</h2>
+    <br>
+
+    <!-- 
+      trim
+      过滤左右两边的空格
+     -->
+    <input type="text" v-model.trim="name">{{name}}
+    <h2>{{name}}</h2>
+    <br>
+  </div>
+  <script type="text/javascript">
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          message: "你好",
+          age: '',
+          name: '     Liu shuai wu'
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注册组件的基本步骤</title>
+  <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 
+    组件的使用分为三个步骤：
+    1.创建组件构造器
+    2.注册组件
+    3.使用组件
+   -->
+  <div id="app">
+    <!-- 
+      3.使用组件
+      组件必须挂载到某个Vue实例下，否则不会生效
+    -->
+    <my-cpn></my-cpn>
+    <my-cpn></my-cpn>
+    <my-cpn></my-cpn>
+  </div>
+  <script type="text/javascript">
+    // 1. 创建组件构造器对象
+    // 调用Vue.extend()创建一个组件构造器，传入template代表自定义组件的模板，该模板就是在使用组件的地方要显示的HTML代码
+    const cpnC = Vue.extend({
+      template: `
+      <div>
+        <h2>我是标题</h2>
+      </div>`
+    })
+
+    // 2.注册组件Vue.component("使用组件名", "组件构造器名")
+    // 调用Vue.component("使用组件名", "组件构造器名")是将第一步的组件构造器注册为一个组件，并给它起一个组件的标签名
+    Vue.component('my-cpn', cpnC)
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>
