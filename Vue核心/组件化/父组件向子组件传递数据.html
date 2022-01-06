@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>父组件向子组件传递数据</title>
+  <script src="../../js/vue.js"></script>
+  <!-- 
+    1. 通过props向子组件传递数据
+    2，通过事件($emit Events)向父组件发送消息
+   -->
+</head>
+
+<body>
+  <div id="app">
+    <cpn :c-movies="movies" :c-message="message"></cpn>
+  </div>
+  <!-- 
+    在组件中，使用props来声明需要从父组件接收的数据
+    props的值有两种形式：字符串数组、对象
+    将父组件数据传给子组件时要使用v-bind进行绑定
+
+    当需要对props进行类型等验证时，就需要对象写法了
+   -->
+
+  <template id="cpn">
+    <div>
+      <ul>
+        <li v-for="(item, index) in cMovies" :key="index">{{item}}</li>
+      </ul>
+      <h2>{{cMessage}}</h2>
+    </div>
+  </template>
+  <script type="text/javascript">
+    function Person(fristName, lastName) {
+      this.fristName = fristName
+      this.lastName = lastName
+    }
+
+    const child = Vue.component('cpn', {
+      template: "#cpn",
+      // props: ['cMovies']    // 数组形式
+      // 对象形式: 变量名: 变量类型
+      props: {
+        // 1.类型限制
+        cMovies: Array,
+        cName: [String, Number],   // 代表该变量可能有多种类型
+
+        // 2.提供变量默认值
+        cMessage: {
+          type: String,
+          default() {        // 使用default定义默认值
+            return "你好啊"
+          },
+          required: true,    // 表示在使用该组件时必须要给该变量传递数据
+        },
+
+        // 3.自定义类型
+        cPerson: {
+          type: Person,
+        },
+      }
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          message: "hello",
+          movies: ['海贼王', '火影忍者', '双城之战']
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+      components: {
+        cpn: child,
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>
