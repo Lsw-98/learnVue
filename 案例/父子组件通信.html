@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>父子组件通信</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <child :c-movies="movies" :c-num1="num1" :c-num2="num2" @num2change="num2Change" @num1change="num1Change"></child>
+  </div>
+
+  <template id="child">
+    <div>
+      <!-- 
+        对cNum1做双向绑定，当input输入的时候cNum1也跟着变
+       -->
+      <h2>props:{{cNum1}}</h2>
+      <h2>data:{{dNum1}}</h2>
+      <input type="text" v-model="dNum1">
+      <!-- 
+        对cNum1做双向绑定，当input输入的时候Vue实例中的num1也跟着变
+       -->
+      <h2>props:{{cNum2}}</h2>
+      <h2>data:{{dNum2}}</h2>
+      <input type="text" v-model="dNum2">
+    </div>
+  </template>
+
+  <script type="text/javascript">
+    const child = Vue.component('child', {
+      template: "#child",
+      props: {
+        cMovies: Array,
+        cNum1: Number,
+        cNum2: Number,
+      },
+      // 当使用v-model修改props中变量的值时，要将props变量在data或computed中重写
+      data() {
+        return {
+          dNum1: this.cNum1,
+          dNum2: this.cNum2,
+        }
+      },
+      // methods: {
+      //   num2Input(event) {
+      //     // 根据输入改变Vue实例中的num1
+      //     this.dNum2 = event.target.value
+      //     // 在每次输入后发送一个事件， 将数据传回父组件中
+      //     this.$emit('num2change', this.dNum2)
+
+      //     // 保持dNum2是dNum1的100倍
+      //     this.dNum1 = this.dNum2 / 100
+      //     // 将dNum1的值传给父组件
+      //     this.$emit('num1change', this.dNum1)
+      //   },
+      // },
+      watch: {
+        // 变量名(newValue, oldValue){}
+        // 监听哪个变量的改变，函数名就为变量
+        // 参数为改变的值
+        dNum1(newValue) {
+          this.dNum2 = newValue * 100
+          this.$emit('num2change', this.dNum2)
+        },
+        dNum2(newValue) {
+          this.dNum1 = newValue / 100
+          this.$emit('num1change', this.dNum1)
+        }
+      }
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          movies: ['我是你爹', '我是你爸爸', '我是你父亲'],
+          num1: 1,
+          num2: 0,
+        };
+      },
+      methods: {
+        num1Change(value) {
+          this.num1 = value * 1
+        },
+        num2Change(value) {
+          this.num2 = value * 1
+        },
+      },
+      computed: {
+
+      },
+      components: {
+        cpn: child,
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

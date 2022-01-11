@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编译作用域</title>
+  <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 
+      这里的isShow使用的是Vue实例中的isShow变量
+      不会看当前标签属于哪个组件
+      而是看在哪个模板中
+
+      父模板的所有东西都会在父级作用域内编译：子组件模板所有的东西都会在子级作用域内编译
+     -->
+    <child v-show="isShow"></child>
+  </div>
+
+  <template id="child">
+    <div>
+      <p>我是子标题</p>
+      <h2>我是子组件</h2>
+      <!-- 
+        这里使用的就是子组件中的isShow，因为该作用域属于子组件的模板
+       -->
+      <button v-show="isShow">我是子组件的按钮</button>
+    </div>
+  </template>
+
+  <script type="text/javascript">
+    const child = Vue.component('child', {
+      template: "#child",
+      data() {
+        return {
+          isShow: false,
+        }
+      },
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          isShow: true,
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+      components: {
+
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

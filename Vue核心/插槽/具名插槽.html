@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../js/vue.js"></script>
+  <title>具名插槽</title>
+</head>
+
+<body>
+  <!-- 
+    具名插槽
+    具名插槽则是当子组件需要显示不同的效果时使用具名插槽，通过name属性给插槽命名。
+   -->
+  <div id="app">
+    <child></child>
+    <child>
+      <button slot="left">返回</button>
+      <span slot="center">标题</span>
+    </child>
+  </div>
+
+  <template id="child">
+    <div>
+      <p>我是子标题</p>
+      <h2>我是子组件</h2>
+      <!-- 通过name属性指定要替换的插槽 -->
+      <slot name="left"><span>左边</span></slot>
+      <slot name="center"><span>中间</span></slot>
+      <slot name="right"><span>右边</span></slot>
+    </div>
+  </template>
+
+  <script type="text/javascript">
+    const child = Vue.component('child', {
+      template: "#child"
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+      components: {
+
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>

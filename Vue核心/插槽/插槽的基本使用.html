@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>插槽的基本使用</title>
+  <script src="../../js/vue.js"></script>
+  <!-- 
+    为什么使用slot
+    有些页面的某些组件效果相似，但又不完全相同，这时候我们就需要用到slot
+    组件的插槽是为了让我们封装的组件更具有扩展性
+    让使用者决定组件内部的一些内容到底展示什么
+   -->
+</head>
+
+<body>
+  <div id="app">
+    <!-- 
+      将想要替换插槽的标签写到组件标签内部
+     -->
+    <child></child>
+    <child>
+      <span>我是替换插槽的span</span>
+    </child>
+    <child>
+      <i>我是替换插槽的i1</i>
+      <br>
+      <i>我是替换插槽的i2</i>
+    </child>
+    <child></child>
+  </div>
+
+  <template id="child">
+    <div>
+      <p>我是子标题</p>
+      <h2>我是子组件</h2>
+      <!-- 预留一个插槽 -->
+      <!-- 
+        可以给插槽一个默认标签，若某些组件没有使用插槽，则默认加入该标签
+       -->
+      <slot>
+        <button>我是默认按钮</button>
+      </slot>
+    </div>
+  </template>
+
+  <script type="text/javascript">
+    const child = Vue.component('child', {
+      template: "#child"
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+
+        };
+      },
+      computed: {
+
+      },
+      methods: {
+
+      },
+      components: {
+        cpn: "child"
+      },
+    });
+  </script>
+
+  <style scoped>
+
+  </style>
+
+</body>
+
+</html>
