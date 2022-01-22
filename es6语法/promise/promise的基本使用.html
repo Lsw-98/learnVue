@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise的基本使用</title>
+</head>
+
+<body>
+  <script>
+    // 什么情况下会使用到Promise
+    // 在进行异步操作时
+    const p = new Promise((resolve, reject) => {
+      setTimeout((data) => {
+        resolve('Hello')   // 将异步操作的结果作为参数传递出去
+        reject('error message')
+      }, 1000)
+    })
+
+    p.then(data => {
+      console.log(data);
+    })
+
+    p.catch(err => {
+      console.log(err);
+    })
+  </script>
+</body>
+
+</html>
