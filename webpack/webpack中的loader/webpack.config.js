@@ -21,8 +21,12 @@ module.exports = {
         // 使用多个loader时，从右向左依次生效
         use: ['style-loader', 'css-loader']
       },
+      {// less样式的loader
+        test: /\.less$/,
+        use: ['styl-loader', 'css-loader', 'less-loader']
+      },
       {// 图片的loader
-        test: /\.(png|jpg|gif|jpeg)$/,
+        test: /\.(png|jpg|gif|jpeg|webp)$/,
         use: [
           {
             loader: 'url-loader',
@@ -46,6 +50,17 @@ module.exports = {
           }
         },
       },
+      {  // typeScript-loader
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,   // 传入该选项以缩短ts-loader的构建时间
+            },
+          },
+        ],
+      }
     ]
   },
 }
